@@ -23,5 +23,5 @@ class ConnectionLayer(object):
     def wrap_path(self, path):
         """Takes a path inside container/chroot/jail and translates
         it into host path."""
-        assert path.startswith('/'), "TODO: relative paths"
+        assert path.startswith('/'), "TODO: relative paths '{}'".format(path)
         return os.path.join(self.chroot, path[1:])

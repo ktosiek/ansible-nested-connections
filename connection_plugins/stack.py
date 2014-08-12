@@ -62,7 +62,7 @@ class Connection(object):
 
         for layer in self.connection_layers:
             command = layer.wrap_command(command)
-            if tmp_path is not None:
+            if tmp_path:
                 tmp_path = layer.wrap_path(tmp_path)
 
         # TODO: what is that second returned value?
@@ -82,3 +82,9 @@ class Connection(object):
             remote = layer.wrap_path(remote)
 
         return self.base_connection.put_file(local, remote)
+
+    def fetch_file(self, remote, local):
+        for layer in self.connection_layers:
+            remote = layer.wrap_path(remote)
+
+        return self.base_connection.fetch_file(remote, local)
