@@ -1,3 +1,4 @@
+from ansible import constants as C
 from ansible.errors import AnsibleError
 from ansible.utils.plugins import connection_loader, PluginLoader
 
@@ -5,7 +6,7 @@ from ansible.utils.plugins import connection_loader, PluginLoader
 connection_layer_loader = PluginLoader(
     "ConnectionLayer",
     '',
-    '',
+    C.DEFAULT_CONNECTION_PLUGIN_PATH,
     'connection_plugins')
 
 
