@@ -1,0 +1,2 @@
+localhost ansible_connection=local
+chrooted ansible_connection=stack ansible_ssh_host=local;chroot=./trusty

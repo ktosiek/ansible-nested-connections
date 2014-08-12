@@ -1,0 +1,13 @@
+- hosts: localhost
+  gather_facts: no
+  sudo: yes
+  vars:
+    # Take everything after last "=", which should be the chroot path here
+    chroot_path: '{{ hostvars["chrooted"]["ansible_ssh_host"].rsplit("=", 1)[1] }}'
+  tasks:
+    - name: Bootstrap the chroot
+      shell: debootstrap trusty "{{ chroot_path }}"
+             creates="{{ chroot_path }}/bin/sh"
+    - name: Install python
+      shell: chroot "{{ chroot_path }}" apt-get install -y python
+             creates="{{ chroot_path }}/usr/bin/python"

@@ -1,0 +1,4 @@
+*.pyc
+
+/example/trusty/
+/example/host_hosts

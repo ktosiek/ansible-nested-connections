@@ -1,0 +1,22 @@
+- hosts: chrooted
+  tasks:
+    - name: We can access facts from inside
+      debug:
+        msg: >-
+          Distro: {{ ansible_distribution }} {{ ansible_distribution_version }};
+          Interfaces: {{ ansible_interfaces }}
+
+    - name: Send a file
+      copy:
+        src: /etc/hosts
+        dest: /host_hosts
+
+    - name: Extend it
+      shell: echo "123.123.123.123 dummy" >> /host_hosts
+
+    - name: And get it back
+      fetch:
+        src: /host_hosts
+        dest: ./
+        mode: 666
+        flat: yes
